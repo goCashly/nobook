@@ -7,14 +7,14 @@ import { courses, productsFor } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "All Study Notes & Prices",
-  description: "Prices for Real Estate, Mortgage, OMVIC, RIBO auto insurance and LLQP exam study notes. Instant PDF download.",
+  description: "Prices for Real Estate, Mortgage, OMVIC, RIBO auto insurance and LLQP exam study notes. Order on WhatsApp.",
 };
 
 export default function CoursesPage() {
   return (
     <>
       <PageHero eyebrow="Shop" title="All study notes & prices">
-        Choose your exam, pay securely, and download your notes instantly.
+        Choose your exam, message us on WhatsApp, and get your notes right away.
       </PageHero>
 
       <div className="sticky top-16 z-30 border-b border-navy-100 bg-white/95 backdrop-blur">

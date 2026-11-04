@@ -3,7 +3,9 @@
 A Next.js website for selling downloadable study notes for Ontario & Canadian licensing exams:
 Real Estate, Mortgage Agent/Broker, OMVIC, Auto Insurance (RIBO) and LLQP.
 
-Customers pick a package, pay with Stripe, and download the PDF instantly.
+Customers pick a package and tap **Buy on WhatsApp**, which opens a WhatsApp chat with the order
+pre-filled. Payment and sending the PDF is handled directly over WhatsApp — there's no checkout
+or server backend.
 
 ## Run it locally
 
@@ -12,44 +14,47 @@ Customers pick a package, pay with Stripe, and download the PDF instantly.
 
    ```bash
    npm install
-   copy .env.example .env.local
    npm run dev
    ```
 
 3. Open http://localhost:3000
-
-With `DEMO_MODE=true` and no Stripe key, "Buy & Download" skips payment so you can test the whole flow.
 
 ## Everything you'll want to edit
 
 | What | Where |
 | --- | --- |
 | Prices, package names, what's included | `lib/products.ts` |
-| Phone numbers, WhatsApp, contact name, email | `lib/site.ts` |
-| Your real PDF notes | `private-notes/` (file names must match `file` in `lib/products.ts`) |
+| Phone numbers, WhatsApp number, contact name, email | `lib/site.ts` |
+| Your real PDF notes (sent manually over WhatsApp) | `private-notes/` |
 | FAQ | `components/Faq.tsx` |
 | Home page text | `app/page.tsx` |
 
-The PDFs in `private-notes/` are placeholders — replace them with your real notes.
-They are **not** in `/public`, so nobody can download them without a paid Stripe order.
+The PDFs in `private-notes/` are placeholders and are never published to the live site — they're
+just kept in the repo for your own reference. Replace them with your real notes and send them to
+customers yourself once they message you on WhatsApp.
 
-## Taking real payments (Stripe)
+## Deploying (GitHub Pages)
 
-1. Create an account at https://stripe.com (Canada, CAD).
-2. Copy your **secret key** from Developers → API keys.
-3. In `.env.local` (or your hosting provider's environment variables):
+The site is a fully static export (`next build` with `output: "export"` in `next.config.mjs`),
+so it deploys for free on GitHub Pages.
 
-   ```
-   STRIPE_SECRET_KEY=sk_test_...      # test first, then sk_live_...
-   NEXT_PUBLIC_SITE_URL=https://your-domain.ca
-   DEMO_MODE=false
-   ```
+1. **Enable Pages**: in the repo on GitHub, go to Settings → Pages → Build and deployment → set
+   Source to **GitHub Actions**.
+2. Push to `main` — [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds the site
+   and publishes the `out/` folder automatically. You can also trigger it manually from the
+   Actions tab (`workflow_dispatch`).
+3. **Custom domain (nobook.ca)**: the build includes `public/CNAME` with `nobook.ca`, which GitHub
+   Pages picks up automatically. At your domain registrar, point the domain at GitHub Pages:
+   - Apex (`nobook.ca`) → four `A` records to:
+     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - `www.nobook.ca` → `CNAME` record to `<your-github-org>.github.io`
+   - DNS changes can take a few hours to propagate. Once it resolves, GitHub will auto-provision
+     HTTPS for the domain (check Settings → Pages for the "Enforce HTTPS" option).
 
-4. Test with card `4242 4242 4242 4242`, any future date, any CVC.
+## Note on the old Stripe checkout
 
-How it works: `/api/checkout` creates a Stripe Checkout session → after paying the customer lands on
-`/success?session_id=…` → `/api/download` checks with Stripe that the session is paid before sending the PDF.
-
-## Deploying
-
-Easiest: push to GitHub and import into https://vercel.com. Add the environment variables above, then connect your domain.
+This project used to take payments through Stripe with `/api/checkout` and `/api/download` routes.
+Since buying now happens over WhatsApp, those routes (and the Stripe dependency) were removed —
+they also aren't supported on a static export like GitHub Pages. If you ever want automated
+card payments again, you'll need a host that runs a Node server (e.g. Vercel) instead of GitHub
+Pages, and to reintroduce a checkout API route.

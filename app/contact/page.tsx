@@ -41,7 +41,7 @@ export default function ContactPage() {
       </div>
       <div className="container-x pb-20 text-center text-slate-600">
         <p>
-          Bought notes and can&apos;t find your download? Send us your Stripe receipt on WhatsApp and we&apos;ll resend it.
+          Already ordered and need your notes resent? Message us on WhatsApp with your order details and we&apos;ll send them again.
         </p>
       </div>
     </>

@@ -9,8 +9,8 @@ import { site, telLink, whatsappLink } from "@/lib/site";
 
 const steps = [
   { icon: "target" as const, title: "Choose your exam", text: "Pick Real Estate, Mortgage, OMVIC, RIBO or LLQP notes." },
-  { icon: "lock" as const, title: "Pay securely", text: "Checkout in seconds with card, Apple Pay or Google Pay." },
-  { icon: "download" as const, title: "Download instantly", text: "Get your PDF notes right away and start studying today." },
+  { icon: "whatsapp" as const, title: "Message us", text: "Tap Buy and send us the WhatsApp message — we'll confirm your order." },
+  { icon: "download" as const, title: "Get your notes", text: "We send your PDF notes straight to you and you start studying today." },
 ];
 
 const reasons = [
@@ -40,8 +40,8 @@ export default function Home() {
               No books required.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-navy-100">
-              Exam-focused study notes and practice questions for Ontario &amp; Canadian licensing exams. Buy online,
-              download instantly, and pass with confidence.
+              Exam-focused study notes and practice questions for Ontario &amp; Canadian licensing exams. Order on
+              WhatsApp and pass with confidence.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/courses" className="btn-gold text-base">
@@ -52,7 +52,7 @@ export default function Home() {
               </a>
             </div>
             <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-navy-100">
-              {["Instant PDF download", "Secure Stripe checkout", "Ontario-focused content"].map((t) => (
+              {["Instant PDF notes", "Order easily on WhatsApp", "Ontario-focused content"].map((t) => (
                 <span key={t} className="flex items-center gap-2">
                   <Icon name="check" className="h-4 w-4 text-gold-400" /> {t}
                 </span>

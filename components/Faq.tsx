@@ -1,15 +1,15 @@
 const faqs = [
   {
-    q: "How do I get my notes after paying?",
-    a: "As soon as your payment goes through you're taken to a download page with your PDF. You can download it right away — no waiting, no shipping.",
+    q: "How do I get my notes after ordering?",
+    a: "Tap Buy to send us a WhatsApp message with the package you want. We'll confirm your order and payment, then send your PDF notes straight to you.",
   },
   {
-    q: "Is payment secure?",
-    a: "Yes. All payments are processed by Stripe, a PCI-compliant payment provider. We never see or store your card details. Visa, Mastercard, Amex, Apple Pay and Google Pay are accepted.",
+    q: "How do I pay?",
+    a: "We'll agree on a payment method with you directly over WhatsApp (e-transfer or another convenient option). We never ask for card details over chat.",
   },
   {
-    q: "What if I lose my download link?",
-    a: "Keep the link from your download page — it works again later. If you lose it, contact us by phone or WhatsApp with your receipt and we'll send it again.",
+    q: "What if I lose my notes?",
+    a: "No problem — message us on WhatsApp with your name or order details and we'll send them to you again.",
   },
   {
     q: "Are these notes a replacement for the official course?",
